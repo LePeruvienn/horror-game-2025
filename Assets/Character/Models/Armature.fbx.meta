@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 71e8e7cb31724098ab7fbd5cb8469524
+guid: 36078ab0369161e49a29d349ae3e0739
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
@@ -887,3 +887,10 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 267961
+  packageName: 'Starter Assets: Character Controllers | URP'
+  packageVersion: 2.0.2
+  assetPath: Assets/Starter Assets/Runtime/ThirdPersonController/Character/Models/Armature.fbx
+  uploadId: 721456

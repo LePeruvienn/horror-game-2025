@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a4e486edc41618b1e99192fe7e86dce6
+guid: 063aa479676c4084ebf187660ca0a7b8
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
@@ -922,3 +922,10 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 267961
+  packageName: 'Starter Assets: Character Controllers | URP'
+  packageVersion: 2.0.2
+  assetPath: Assets/Starter Assets/Runtime/ThirdPersonController/Character/Animations/Jump--InAir.anim.fbx
+  uploadId: 721456

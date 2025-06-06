@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: dccf767f96cefbe64b3bf028c01613f5
+guid: 16114d403eabb53438de032c6f0d1deb
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
@@ -931,3 +931,10 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 267961
+  packageName: 'Starter Assets: Character Controllers | URP'
+  packageVersion: 2.0.2
+  assetPath: Assets/Starter Assets/Runtime/ThirdPersonController/Character/Animations/Locomotion--Run_N.anim.fbx
+  uploadId: 721456

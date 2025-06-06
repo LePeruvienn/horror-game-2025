@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9bc47dc5c7dd71600bd7f49b4c2567f3
+guid: 7e0223e1d3e1733499accfa5ebffb67e
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
@@ -95,3 +95,10 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 267961
+  packageName: 'Starter Assets: Character Controllers | URP'
+  packageVersion: 2.0.2
+  assetPath: Assets/Starter Assets/Sample/Environment/Art/Models/Stairs_650_400_300_Mesh.fbx
+  uploadId: 721456

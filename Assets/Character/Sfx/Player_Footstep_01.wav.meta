@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d7078f7c2a5f7e2df910d3d253da01c3
+guid: 72f526a6a9890f643a88e85a61c86c8a
 AudioImporter:
   externalObjects: {}
   serializedVersion: 6
@@ -20,3 +20,10 @@ AudioImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 267961
+  packageName: 'Starter Assets: Character Controllers | URP'
+  packageVersion: 2.0.2
+  assetPath: Assets/Starter Assets/Runtime/ThirdPersonController/Character/Sfx/Player_Footstep_01.wav
+  uploadId: 721456

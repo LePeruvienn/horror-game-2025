@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 229a7de14c0cacb89801e74e014529a5
+guid: 1c98c94efa7792645972ecf95e6f86c2
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -106,3 +106,10 @@ TextureImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 267961
+  packageName: 'Starter Assets: Character Controllers | URP'
+  packageVersion: 2.0.2
+  assetPath: Assets/Starter Assets/Runtime/ThirdPersonController/Character/Textures/Armature_Legs_MetallicSmoothness.tif
+  uploadId: 721456

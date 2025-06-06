@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ed295759950a3c17b9483e6f353d9386
+guid: 3c033631149b9c541bcf155cd94cccba
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
@@ -924,3 +924,10 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 267961
+  packageName: 'Starter Assets: Character Controllers | URP'
+  packageVersion: 2.0.2
+  assetPath: Assets/Starter Assets/Runtime/ThirdPersonController/Character/Animations/Locomotion--Run_N_Land.anim.fbx
+  uploadId: 721456

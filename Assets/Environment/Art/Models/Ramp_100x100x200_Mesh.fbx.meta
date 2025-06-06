@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4c4886d32a8c5acf4b3c8903522a0e8b
+guid: bfff06aaff363a847ad37bf592364e6b
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
@@ -95,3 +95,10 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 267961
+  packageName: 'Starter Assets: Character Controllers | URP'
+  packageVersion: 2.0.2
+  assetPath: Assets/Starter Assets/Sample/Environment/Art/Models/Ramp_100x100x200_Mesh.fbx
+  uploadId: 721456

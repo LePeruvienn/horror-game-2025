@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5e09a124a7124441b9a85c0640ea57a2
+guid: 325a26d62b61fa94cb3c97c435efebc5
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
@@ -924,3 +924,10 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 267961
+  packageName: 'Starter Assets: Character Controllers | URP'
+  packageVersion: 2.0.2
+  assetPath: Assets/Starter Assets/Runtime/ThirdPersonController/Character/Animations/Locomotion--Walk_N_Land.anim.fbx
+  uploadId: 721456

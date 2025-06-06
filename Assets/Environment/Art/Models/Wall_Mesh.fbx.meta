@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3a0d1f9f1e0f1c03980b3287266bcde0
+guid: ff02a0a00ab750f48b09459b1cafd1b8
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
@@ -95,3 +95,10 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 267961
+  packageName: 'Starter Assets: Character Controllers | URP'
+  packageVersion: 2.0.2
+  assetPath: Assets/Starter Assets/Sample/Environment/Art/Models/Wall_Mesh.fbx
+  uploadId: 721456

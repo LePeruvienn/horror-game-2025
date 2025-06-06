@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b71ec60ed986ca6f389e8453380ba458
+guid: c6a55ba99e9e99d41b7eef123e311a43
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
@@ -95,3 +95,10 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 267961
+  packageName: 'Starter Assets: Character Controllers | URP'
+  packageVersion: 2.0.2
+  assetPath: Assets/Starter Assets/Sample/Environment/Art/Models/Box_350x250x200_Mesh.fbx
+  uploadId: 721456

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 1ee92358d1925bafd90e6c2e3f6f5803
+guid: 2a3daea46c599324e873f935ab08000a
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -106,3 +106,10 @@ TextureImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 267961
+  packageName: 'Starter Assets: Character Controllers | URP'
+  packageVersion: 2.0.2
+  assetPath: Assets/Starter Assets/Runtime/ThirdPersonController/Character/Textures/Armature_Body_Normal.tif
+  uploadId: 721456

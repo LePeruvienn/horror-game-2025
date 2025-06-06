@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9d87fa9f8cb4eb42e8de050304d0aa8f
+guid: 12e52e465ed793a4d801955e9f964a82
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
@@ -922,3 +922,10 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 267961
+  packageName: 'Starter Assets: Character Controllers | URP'
+  packageVersion: 2.0.2
+  assetPath: Assets/Starter Assets/Runtime/ThirdPersonController/Character/Animations/Stand--Idle.anim.fbx
+  uploadId: 721456

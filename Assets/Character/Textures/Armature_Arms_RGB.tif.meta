@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 87fde04c53dda69978d1cf6c69605732
+guid: 9b46b2c2f21deb843b7ac9242d5f13e6
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -106,3 +106,10 @@ TextureImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 267961
+  packageName: 'Starter Assets: Character Controllers | URP'
+  packageVersion: 2.0.2
+  assetPath: Assets/Starter Assets/Runtime/ThirdPersonController/Character/Textures/Armature_Arms_RGB.tif
+  uploadId: 721456

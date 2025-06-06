@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7cc758b2fe8c0b48e860b25627ea095d
+guid: c5c221ed57a3bf6488f8eba0db28a004
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -118,3 +118,10 @@ TextureImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 267961
+  packageName: 'Starter Assets: Character Controllers | URP'
+  packageVersion: 2.0.2
+  assetPath: Assets/Starter Assets/Sample/Environment/Art/Textures/Grid_01_Normal.png
+  uploadId: 721456
