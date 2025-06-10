@@ -234,8 +234,7 @@ namespace StarterAssets
 			{
 				// creates curved result rather than a linear one giving a more organic speed change
 				// note T in Lerp is clamped, so we don't need to clamp our speed
-				_speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude,
-					Time.deltaTime * SpeedChangeRate);
+				_speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude, Time.deltaTime * SpeedChangeRate);
 
 				// round speed to 3 decimal places
 				_speed = Mathf.Round(_speed * 1000f) / 1000f;
@@ -251,8 +250,13 @@ namespace StarterAssets
 			// normalise input direction
 			Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
 
-			// Rotate the player depending of the camera direction
-			_targetRotation = _mainCamera.transform.eulerAngles.y;
+			// Add angle offset when player is moving to right or left !
+			float angleOffset = 0f;
+			if (inputDirection.x != 0f)
+				angleOffset = 45f * inputDirection.x;
+
+			// Rotate the player depending of the camera direction + angle offset to move player's body toward he is moving
+			_targetRotation = _mainCamera.transform.eulerAngles.y + angleOffset;
 			float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
 				RotationSmoothTime);
 
@@ -278,8 +282,12 @@ namespace StarterAssets
 			// update animator if using character
 			if (_hasAnimator)
 			{
-				_animator.SetFloat(_animIDSpeed, _animationBlend);
-				_animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
+				// Set speed backwards if player is moving backwards
+				float sign = Mathf.Sign(inputDirection.z);
+
+				// Add moving speed to animation to handle idl/walk/run
+				_animator.SetFloat(_animIDSpeed, _animationBlend * sign);
+				_animator.SetFloat(_animIDMotionSpeed, inputMagnitude * sign);
 			}
 		}
 
