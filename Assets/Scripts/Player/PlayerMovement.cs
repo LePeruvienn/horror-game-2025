@@ -1,15 +1,11 @@
 ﻿using UnityEngine;
-#if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
-#endif
 
 /* Note: animations are called via the controller for both the character and capsule using animator null checks
  */
 [RequireComponent(typeof(CharacterController))]
-#if ENABLE_INPUT_SYSTEM
 [RequireComponent(typeof(PlayerInput))]
-#endif
-public class PlayerController : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
 	[Header("Player")]
 	[Tooltip("Move speed of the character in m/s")]
@@ -95,9 +91,8 @@ public class PlayerController : MonoBehaviour
 	private int _animIDFreeFall;
 	private int _animIDMotionSpeed;
 
-#if ENABLE_INPUT_SYSTEM
 	private PlayerInput _playerInput;
-#endif
+
 	private Animator _animator;
 	private CharacterController _controller;
 	private InputManager _input;
@@ -111,11 +106,7 @@ public class PlayerController : MonoBehaviour
 	{
 		get
 		{
-#if ENABLE_INPUT_SYSTEM
 			return _playerInput.currentControlScheme == "KeyboardMouse";
-#else
-			return false;
-#endif
 		}
 	}
 
@@ -136,11 +127,7 @@ public class PlayerController : MonoBehaviour
 		_hasAnimator = TryGetComponent(out _animator);
 		_controller = GetComponent<CharacterController>();
 		_input = GetComponent<InputManager>();
-#if ENABLE_INPUT_SYSTEM
 		_playerInput = GetComponent<PlayerInput>();
-#else
-		Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
-#endif
 
 		AssignAnimationIDs();
 
