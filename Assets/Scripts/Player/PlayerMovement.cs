@@ -14,6 +14,9 @@ public class PlayerMovement : MonoBehaviour
 	[Tooltip("Sprint speed of the character in m/s")]
 	public float SprintSpeed = 5.335f;
 
+	[Tooltip("Crouch speed of the character in m/s")]
+	public float CrouchSpeed = 1.5f;
+
 	[Tooltip("How fast the character turns to face movement direction")]
 	[Range(0.0f, 0.3f)]
 	public float RotationSmoothTime = 0.12f;
@@ -197,8 +200,20 @@ public class PlayerMovement : MonoBehaviour
 
 	private void Move()
 	{
-		// set target speed based on move speed, sprint speed and if sprint is pressed
-		float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
+		// Set targetSpeed depending of current input
+		float targetSpeed;
+
+		// Crouch input have the priority overall
+		if (_input.crouch)
+			targetSpeed = CrouchSpeed;
+
+		// Input Sprint is only active if crouch in not
+		else if (_input.sprint)
+			targetSpeed = SprintSpeed;
+
+		// Any input is active just have current MoveSpeed
+		else
+			targetSpeed = MoveSpeed;
 
 		// a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 
@@ -365,23 +380,21 @@ public class PlayerMovement : MonoBehaviour
 			GroundedRadius);
 	}
 
-	private void OnFootstep(AnimationEvent animationEvent)
-	{
-		if (animationEvent.animatorClipInfo.weight > 0.5f)
-		{
-			if (FootstepAudioClips.Length > 0)
-			{
-				var index = Random.Range(0, FootstepAudioClips.Length);
-				AudioSource.PlayClipAtPoint(FootstepAudioClips[index], transform.TransformPoint(_controller.center), FootstepAudioVolume);
-			}
+	private void OnFootstep(AnimationEvent animationEvent) {
+
+		// If we are not crouching and we have step
+		if (!_input.crouch && animationEvent.animatorClipInfo.weight > 0.5f) {
+
+			// play a random step sound
+			int index = Random.Range(0, FootstepAudioClips.Length);
+			AudioSource.PlayClipAtPoint(FootstepAudioClips[index], transform.TransformPoint(_controller.center), FootstepAudioVolume);
 		}
 	}
 
-	private void OnLand(AnimationEvent animationEvent)
-	{
+	private void OnLand(AnimationEvent animationEvent) {
+
+		// If when we land from a jump with a time longer than the half of the animation
 		if (animationEvent.animatorClipInfo.weight > 0.5f)
-		{
 			AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
-		}
 	}
 }

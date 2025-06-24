@@ -8,6 +8,7 @@ public class InputManager : MonoBehaviour
 	public Vector2 look;
 	public bool jump;
 	public bool sprint;
+	public bool crouch;
 	public bool interact;
 	public bool drop;
 	public bool fire;
@@ -19,25 +20,30 @@ public class InputManager : MonoBehaviour
 	public bool cursorLocked = true;
 	public bool cursorInputForLook = true;
 
-	public void OnMove(InputValue value)
-	{
+	public void OnMove(InputValue value) {
+
 		move = value.Get<Vector2>();
 	}
 
-	public void OnLook(InputValue value)
-	{
+	public void OnLook(InputValue value) {
+
 		if(cursorInputForLook)
 			look = value.Get<Vector2>();
 	}
 
-	public void OnJump(InputValue value)
-	{
+	public void OnJump(InputValue value) {
+
 		jump = value.isPressed;
 	}
 
-	public void OnSprint(InputValue value)
-	{
+	public void OnSprint(InputValue value) {
+
 		sprint = value.isPressed;
+	}
+
+	public void OnCrouch(InputValue value) {
+		
+		crouch = value.isPressed;
 	}
 
 	public void OnInteract(InputValue value) {
@@ -55,13 +61,13 @@ public class InputManager : MonoBehaviour
 		fire = value.isPressed;
 	}
 
-	private void OnApplicationFocus(bool hasFocus)
-	{
+	private void OnApplicationFocus(bool hasFocus) {
+
 		SetCursorState(cursorLocked);
 	}
 
-	private void SetCursorState(bool newState)
-	{
+	private void SetCursorState(bool newState) {
+
 		Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
 	}
 }
