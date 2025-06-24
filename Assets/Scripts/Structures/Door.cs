@@ -7,58 +7,88 @@ public enum DoorType {
 
 public class Door : MonoBehaviour, IInteractable
 {
-
 	[Header("Door Configuration")]
-	[SerializeField] private bool IsOpen;
-	[SerializeField] private DoorType Type;
-	[SerializeField] private float transitionDuration;
+	[SerializeField] private Transform Pivot;
+	[SerializeField] private bool IsOpen = false;
+	[SerializeField] private DoorType Type = DoorType.Rotation;
+	[SerializeField] private float TransitionDuration = 1.5f;
 
 	[Header("End Position")]
 	[SerializeField] private float RotationAmount = 90f;
 	[SerializeField] private float SlideAmount = 1.2f;
+	[SerializeField] private Vector3 RotationAxis = Vector3.up;
+	[SerializeField] private Vector3 SlideDirection = Vector3.right;
 
 	private bool _isTransitioning = false;
-	private float transitionTime = 0;
+	private float _transitionTime = 0f;
 
 	private Quaternion _startRotation;
-	private Vector3 _startPosition;
-
 	private Quaternion _endRotation;
+
+	private Vector3 _startPosition;
 	private Vector3 _endPosition;
-    private Vector3 Forward;
 
 	// Start is called once before the first execution of Update after the MonoBehaviour is created
 	private void Start() {
-	
-		// Save Start Rotation & Position
-		_startPosition = transform.position;
-		_startRotation = transform.rotation;
 
-		// Since "Forward" actually is pointing into the door frame, choose a direction to think about as "forward" 
-		Forward = transform.right;
+		// Save Pivot start Position & rotation
+		_startRotation = Pivot.rotation;
+		_startPosition = Pivot.position;
 	}
 
 	// Update is called once per frame
 	private void Update() {
-	
-		// If Door is not transitioning stop here
+
+		// If not transitioning there is noting to do
 		if (!_isTransitioning) return;
 
-		// Remove elapsed time
-		transitionTime -= Time.deltaTime;
+		// Add elapsed time to transition
+		_transitionTime += Time.deltaTime;
 
-		if (transitionTime > 0) {
+		// Get transition ratio
+		float t = Mathf.Clamp01(_transitionTime / TransitionDuration);
 
-			transform.rotation = Quaternion.Slerp(_startRotation, _endRotation, transitionTime);
-		}
+		// If door is a rotation, rotate door
+		if (Type == DoorType.Rotation)
+			Pivot.rotation = Quaternion.Slerp(_startRotation, _endRotation, t);
+
+		// If door is a slide, slide door
+		else if (Type == DoorType.Slide)
+			Pivot.position = Vector3.Lerp(_startPosition, _endPosition, t);
+
+		// When elapsed ratio has finished, set transitioning to false
+		if (t >= 1f)
+			_isTransitioning = false;
 	}
 
 	public void Interact() {
 
-		// If door is already transitioning stop here
+		// if door is already transitioning do do anything
 		if (_isTransitioning) return;
 
-		// Else set _isTransitioning to true
+		// set transitioning to true, reset transition elapsed time to 0
 		_isTransitioning = true;
+		_transitionTime = 0f;
+
+		// Compute start & end rotation for all door types
+
+		// If door is a rotation
+		if (Type == DoorType.Rotation) {
+			_startRotation = Pivot.rotation;
+			float sign = IsOpen ? -1f : 1f;
+			Vector3 direction = transform.TransformDirection(RotationAxis.normalized);
+			_endRotation = _startRotation * Quaternion.AngleAxis(sign * RotationAmount, direction);
+
+		// If door is a rotation
+		} else if (Type == DoorType.Slide) {
+
+			_startPosition = Pivot.position;
+			float sign = IsOpen ? -1 : 1;
+			Vector3 worldSlide = transform.TransformDirection(SlideDirection.normalized);
+			_endPosition = _startPosition + worldSlide * sign * SlideAmount;
+		}
+
+		// Update IsOpen status
+		IsOpen = !IsOpen;
 	}
 }
