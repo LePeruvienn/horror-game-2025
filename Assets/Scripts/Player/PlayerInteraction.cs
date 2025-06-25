@@ -124,7 +124,7 @@ public class PlayerInteraction : MonoBehaviour
 
 		// Reset Object position & rotation
 		obj.transform.localPosition = Vector3.zero;
-		obj.transform.localRotation = Quaternion.identity;
+		props.setStartRotation();
 
 		// vvv Maybe useless ?
 		// obj.transform.localScale = obj.transform.lossyScale;

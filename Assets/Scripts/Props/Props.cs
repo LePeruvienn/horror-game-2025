@@ -6,36 +6,48 @@ public enum PropsState {
 	Falling,
 	Projected
 }
-
+[RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Collider))]
 public class Props : MonoBehaviour, IInteractable
 {
-	private static GameManager _gameManager;
-	private static PlayerInteraction _playerInteraction;
-
 	[Header("Properties")]
 	[SerializeField] private float Weight = 2f;
 	[SerializeField] private float Noise = 1f;
+
+	[Header("Breaking the object")]
 	[SerializeField] private bool IsBreakable = false;
+	[SerializeField] private GameObject baseObject;
+	[SerializeField] private GameObject brokenObject;
 
 	[Header("SFX")]
 	[SerializeField] private AudioClip ThrowImpactSFX;
 	[SerializeField] private AudioClip DropImpactSFX;
 	[SerializeField] private AudioClip PickupSFX;
 
-	private PropsState _state = PropsState.OnGround;
+	private GameManager _gameManager;
+	private PlayerInteraction _playerInteraction;
+
 	private Rigidbody _rigidBody;
+	private AudioSource _audioSource;
+
+	private PropsState _state = PropsState.OnGround;
+
+	private Quaternion _startRotation;
 
 	// Start is called once before the first execution of Update after the MonoBehaviour is created
 	private void Start() {
 
 		// Get GameManager instance and Player Interaction if not done yet
-		if (Props._gameManager == null) {
-			_gameManager = GameManager.getInstance();
-			_playerInteraction = _gameManager.player.Interaction;
-		}
+		_gameManager = GameManager.getInstance();
+		_playerInteraction = _gameManager.player.Interaction;
 
 		// Get object's components
 		_rigidBody = GetComponent<Rigidbody>();
+		_audioSource = GetComponent<AudioSource>();
+
+		// Save start rotation
+		_startRotation = transform.rotation;
 	}
 
 	public void Interact() {
@@ -87,19 +99,34 @@ public class Props : MonoBehaviour, IInteractable
 		_state = PropsState.Falling;
 	}
 
+	public void setStartRotation() {
+
+		transform.rotation = _startRotation;
+	}
+
 	private void OnCollisionEnter(Collision other) {
 
 		switch (_state) {
 		
 			case PropsState.Projected:
+
 				if (ThrowImpactSFX != null)
-					AudioSource.PlayClipAtPoint(ThrowImpactSFX, transform.position);
+					_audioSource.PlayOneShot(ThrowImpactSFX);
+
+				if (IsBreakable) {
+
+					brokenObject.SetActive(true);
+					baseObject.SetActive(false);
+				}
 				break;
 
 			case PropsState.Falling:
 				if (DropImpactSFX != null)
-					AudioSource.PlayClipAtPoint(DropImpactSFX, transform.position);
+					_audioSource.PlayOneShot(DropImpactSFX);
 				break;
 		}
+
+		// Set state on ground
+		_state = PropsState.OnGround;
 	}
 }

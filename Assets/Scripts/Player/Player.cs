@@ -12,10 +12,10 @@ public class Player : MonoBehaviour
 	[HideInInspector] public PlayerInteraction Interaction;
 	[HideInInspector] public PlayerMovement Movement;
 
-	// Start is called once before the first execution of Update after the MonoBehaviour is created
-	private void Start() {
+	private void Awake () {
+
 		// Get Player's components
-		Interaction = GetComponent<PlayerInteraction> ();
-		Movement = GetComponent<PlayerMovement> ();
+		Interaction = GetComponent<PlayerInteraction>();
+		Movement = GetComponent<PlayerMovement>();
 	}
 }
