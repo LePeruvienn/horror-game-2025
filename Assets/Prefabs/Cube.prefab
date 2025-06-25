@@ -152,3 +152,6 @@ MonoBehaviour:
   Weight: 2
   Noise: 1
   IsBreakable: 0
+  ThrowImpactSFX: {fileID: 8300000, guid: f27a72049c4a17362be860b959308e7c, type: 3}
+  DropImpactSFX: {fileID: 0}
+  PickupSFX: {fileID: 0}

@@ -1,15 +1,28 @@
 using UnityEngine;
 
+public enum PropsState {
+	PickedUp,
+	OnGround,
+	Falling,
+	Projected
+}
+
 public class Props : MonoBehaviour, IInteractable
 {
 	private static GameManager _gameManager;
 	private static PlayerInteraction _playerInteraction;
 
+	[Header("Properties")]
 	[SerializeField] private float Weight = 2f;
 	[SerializeField] private float Noise = 1f;
 	[SerializeField] private bool IsBreakable = false;
 
-	private bool _isPickedUp = false;
+	[Header("SFX")]
+	[SerializeField] private AudioClip ThrowImpactSFX;
+	[SerializeField] private AudioClip DropImpactSFX;
+	[SerializeField] private AudioClip PickupSFX;
+
+	private PropsState _state = PropsState.OnGround;
 	private Rigidbody _rigidBody;
 
 	// Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -28,7 +41,7 @@ public class Props : MonoBehaviour, IInteractable
 	public void Interact() {
 
 		// You cant interact with an object if he is is picked up
-		if (_isPickedUp) return;
+		if (_state == PropsState.PickedUp) return;
 
 		// Make Player this Props
 		_playerInteraction.Pickup(this);
@@ -37,13 +50,13 @@ public class Props : MonoBehaviour, IInteractable
 		_rigidBody.isKinematic = true;
 
 		// Set picked up state
-		_isPickedUp = true;
+		_state = PropsState.PickedUp;
 	}
 
 	public void Throw() {
 
 		// You cant throw an object that is not picked up
-		if (!_isPickedUp) return;
+		if (_state != PropsState.PickedUp) return;
 
 		// Set parent to wolrd space (null)
 		transform.SetParent(null);
@@ -55,14 +68,14 @@ public class Props : MonoBehaviour, IInteractable
 		Vector3 throwDirection = Camera.main.transform.forward;
 		_rigidBody.AddForce(throwDirection * _playerInteraction.GetForce(), ForceMode.Impulse);
 
-		// Reset picked up state
-		_isPickedUp = false;
+		// Set new props state
+		_state = PropsState.Projected;
 	}
 
 	public void Drop() {
 
 		// You cant drop an object that is not picked up
-		if (!_isPickedUp) return;
+		if (_state != PropsState.PickedUp) return;
 
 		// Set parent to wolrd space (null)
 		transform.SetParent(null);
@@ -70,7 +83,23 @@ public class Props : MonoBehaviour, IInteractable
 		// Reset Rigidbody Kinematic status
 		_rigidBody.isKinematic = false;
 
-		// Reset picked up state
-		_isPickedUp = false;
+		// Set new props state
+		_state = PropsState.Falling;
+	}
+
+	private void OnCollisionEnter(Collision other) {
+
+		switch (_state) {
+		
+			case PropsState.Projected:
+				if (ThrowImpactSFX != null)
+					AudioSource.PlayClipAtPoint(ThrowImpactSFX, transform.position);
+				break;
+
+			case PropsState.Falling:
+				if (DropImpactSFX != null)
+					AudioSource.PlayClipAtPoint(DropImpactSFX, transform.position);
+				break;
+		}
 	}
 }
