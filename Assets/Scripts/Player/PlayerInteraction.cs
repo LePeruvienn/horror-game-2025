@@ -68,8 +68,6 @@ public class PlayerInteraction : MonoBehaviour
 		// Dont do anything if we are not holding a props
 		if (!_isHoldingProps) return;
 
-		Debug.Log ("THROW");
-
 		// Throw held props
 		_heldProps.Throw();
 

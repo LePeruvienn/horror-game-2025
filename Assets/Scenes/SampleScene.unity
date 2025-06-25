@@ -647,8 +647,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce73923e422de0a6eb40e8e7a6ae3ac7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerObject: {fileID: 0}
   player: {fileID: 0}
+  monster: {fileID: 0}
 --- !u!4 &754455127
 Transform:
   m_ObjectHideFlags: 0
@@ -985,7 +985,7 @@ PrefabInstance:
       objectReference: {fileID: 424931472}
     - target: {fileID: 6587354180699679542, guid: 8c0ffea9cb09ec7cd9892e6cb3709e46, type: 3}
       propertyPath: m_VersionIndex
-      value: 6001
+      value: 6004
       objectReference: {fileID: 0}
     - target: {fileID: 8627046605992001549, guid: 8c0ffea9cb09ec7cd9892e6cb3709e46, type: 3}
       propertyPath: m_Mesh

@@ -4,8 +4,8 @@ public class GameManager : MonoBehaviour
 {
 	private static GameManager _instance;
 
-	[HideInInspector] public GameObject playerObject;
 	[HideInInspector] public Player player;
+	[HideInInspector] public Monster monster;
 
 	private void Awake() {
 
@@ -13,11 +13,9 @@ public class GameManager : MonoBehaviour
 		if (GameManager._instance == null)
 			GameManager._instance = this;
 
-		// Find player object
-		playerObject = GameObject.FindWithTag("Player");
-
-		// Get Player's scripts
-		player = playerObject.GetComponent<Player>();
+		// Get global entities
+		player = FindObjectOfType<Player>();
+		monster = FindObjectOfType<Monster>();
 	}
 
 	public static GameManager getInstance() {
