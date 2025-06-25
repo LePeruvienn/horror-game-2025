@@ -4,9 +4,8 @@ public class GameManager : MonoBehaviour
 {
 	private static GameManager _instance;
 
-	[HideInInspector] public GameObject Player;
-	[HideInInspector] public PlayerInteraction PInteraction;
-	[HideInInspector] public PlayerMovement PMovement;
+	[HideInInspector] public GameObject playerObject;
+	[HideInInspector] public Player player;
 
 	private void Awake() {
 
@@ -15,11 +14,10 @@ public class GameManager : MonoBehaviour
 			GameManager._instance = this;
 
 		// Find player object
-		Player = GameObject.FindWithTag("Player");
+		playerObject = GameObject.FindWithTag("Player");
 
-		// Get player's scripts
-		PInteraction = Player.GetComponent<PlayerInteraction>();
-		PMovement = Player.GetComponent<PlayerMovement>();
+		// Get Player's scripts
+		player = playerObject.GetComponent<Player>();
 	}
 
 	public static GameManager getInstance() {

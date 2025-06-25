@@ -7,39 +7,71 @@ public class MonsterVision : MonoBehaviour
 	[SerializeField] private float viewAngle = 60f;
 
 	private GameManager _gameManager;
-	private GameObject _target;
+	private Player _player;
+	private Transform _playerTransform;
+	private BoxCollider _playerDetectionCollider;
 
-	private Vector3 _dirToPlayer;
+	private bool _isSeeingPlayer = false;
+
+	// All of the point that we want to target on the collider detection
+	private Vector3[] _offsets = new Vector3[] {
+
+		new Vector3(-0.5f,  0.5f, 0), // Top Left
+		new Vector3( 0f,    0.5f, 0), // Top Middle
+		new Vector3( 0.5f,  0.5f, 0), // Top Right
+		new Vector3(-0.5f,  0f,   0), // Mid Left
+		new Vector3( 0f,    0f,   0), // Center
+		new Vector3( 0.5f,  0f,   0), // Mid Right
+		new Vector3(-0.5f, -0.5f, 0), // Bottom Left
+		new Vector3( 0f,   -0.5f, 0), // Bottom Middle
+		new Vector3( 0.5f, -0.5f, 0)  // Bottom Right
+	};
+
+	private Vector3[] _targets;
 
 	// Start is called once before the first execution of Update after the MonoBehaviour is created
-	void Start() {
+	private void Start() {
 		
+		// Get Game Manager & Plaer Instance
 		_gameManager = GameManager.getInstance();
-		_player = _gameManager.PlayerTarget;
-		_dirToPlayer = eyes.forward;
+		_player = _gameManager.player;
+		_playerDetectionCollider = _player.DetectionCollider;
+		_playerTransform = _player.gameObject.transform;
+
+		_targets = new Vector3[_offsets.Length];
 	}
 
-	// Update is called once per frame
-	void Update() {
-		
-		canSeePlayer();
-	}
+	public bool canSeePlayer() {
 
-	private bool canSeePlayer() {
+		Vector3 direction = (_playerTransform.position - eyes.position).normalized;
 
-		 _dirToPlayer = (_player.transform.position - eyes.position).normalized;
-		float angleToPlayer = Vector3.Angle(eyes.forward, _dirToPlayer);
+		float angleToPlayer = Vector3.Angle(eyes.forward, direction);
 
 		if (angleToPlayer > viewAngle) return false;
 
-		// Un seul Raycast
-		if (Physics.Raycast(eyes.position, _dirToPlayer, out RaycastHit hit, viewDistance))
-		{
-
-			Debug.Log (hit.transform.root);
-			return hit.transform.parent.CompareTag("Player");
+		// Compute targets points (in world space)
+		for (int i = 0; i < _offsets.Length; i++) {
+			Vector3 scaledPoint = Vector3.Scale(_playerDetectionCollider.size, _offsets[i]);
+			Vector3 localPoint = _playerDetectionCollider.center + scaledPoint;
+			_targets[i] = _playerDetectionCollider.transform.TransformPoint(localPoint);
 		}
 
+		// hits array where we save all the hits of the raycasts
+		RaycastHit[] hits = new RaycastHit[_offsets.Length];
+
+		for (int i = 0; i < _targets.Length; i++) {
+
+			Vector3 targetDirection = (_targets[i] - eyes.position).normalized;
+	
+			// Check if RaycastHit something
+			if (Physics.Raycast(eyes.position, targetDirection, out hits[i], viewDistance)) {
+
+				// Return true if we have seen the player
+				if (hits[i].transform.root.CompareTag ("Player")) return true;
+			}
+		}
+
+		// Return false if have not seen him
 		return false;
 	}
 
@@ -59,8 +91,17 @@ public class MonsterVision : MonoBehaviour
 		Gizmos.DrawRay(eyes.position, leftBoundary * viewDistance);
 		Gizmos.DrawRay(eyes.position, rightBoundary * viewDistance);
 
-		// Rayon central (avant)
+		// Raycasts
 		Gizmos.color = Color.red;
-		Gizmos.DrawRay(eyes.position, _dirToPlayer * viewDistance);
+
+		if (_targets == null) return;
+
+		for (int i = 0; i < _targets.Length; i++) {
+
+			if (_targets[i] == null) continue;
+
+			Vector3 direction = (_targets[i] - eyes.position).normalized;
+			Gizmos.DrawRay(eyes.position, direction * viewDistance);
+		}
 	}
 }

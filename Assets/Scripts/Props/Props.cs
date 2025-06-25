@@ -18,7 +18,7 @@ public class Props : MonoBehaviour, IInteractable
 		// Get GameManager instance and Player Interaction if not done yet
 		if (Props._gameManager == null) {
 			_gameManager = GameManager.getInstance();
-			_playerInteraction = _gameManager.PInteraction;
+			_playerInteraction = _gameManager.player.Interaction;
 		}
 
 		// Get object's components
