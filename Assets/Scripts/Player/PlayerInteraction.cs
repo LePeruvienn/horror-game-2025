@@ -10,6 +10,8 @@ public class PlayerInteraction : MonoBehaviour
 	[SerializeField] private float Range = 2.0f;
 	[SerializeField] private float Force = 2.0f;
 
+	private bool haveRaycasted = false;
+	private GameObject raycastedObject = null;
 	private bool _isHoldingProps = false;
 	private Props _heldProps;
 	private InputManager _input;
@@ -30,15 +32,22 @@ public class PlayerInteraction : MonoBehaviour
 
 	// Update is called once per frame
 	private void Update() {
+
+		// Reset haveRaycasted value
+		haveRaycasted = false;
 		
+		// Handle inputs
 		if (_input.interact)
 			Interact();
 
-		else if (_input.drop)
+		if (_input.drop)
 			Drop();
 
-		else if (_input.fire)
+		if (_input.fire)
 			Throw();
+		
+		if (_input.drag)
+			Drag();
 	}
 
 	private void Interact() {
@@ -46,18 +55,42 @@ public class PlayerInteraction : MonoBehaviour
 		// Reset interact input status
 		_input.interact = false;
 
-		// Ray cast the object
-		GameObject obj = InteractionRaycast();
+		// If we dont have raycasted the object for the current farme, raycast it
+		if (haveRaycasted == false) {
+
+			raycastedObject = InteractionRaycast();
+			haveRaycasted = true;
+		}
 
 		// If we dont hit an object stop here
-		if (obj == null) return;
+		if (raycastedObject == null) return;
 
 		// Get IInteractable Interface
-		IInteractable interactable = obj.GetComponent<IInteractable>();
+		IInteractable interactable = raycastedObject.GetComponent<IInteractable>();
 
 		// If we can interact with the object, well call the interact method
 		if (interactable != null)
 			interactable.Interact();
+	}
+
+	private void Drag() {
+
+		// If we dont have raycasted the object for the current farme, raycast it
+		if (haveRaycasted == false) {
+
+			raycastedObject = InteractionRaycast();
+			haveRaycasted = true;
+		}
+
+		// If we dont hit an object stop here
+		if (raycastedObject == null) return;
+
+		// Get IDraggable Interface
+		IDraggable draggable = raycastedObject.GetComponentInChildren<IDraggable>();
+		
+		// If the object is a draggable drag it !
+		if (draggable != null)
+			draggable.Drag (_input.look);
 	}
 
 	private void Throw() {

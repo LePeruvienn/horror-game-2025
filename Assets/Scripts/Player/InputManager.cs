@@ -12,6 +12,8 @@ public class InputManager : MonoBehaviour
 	public bool interact;
 	public bool drop;
 	public bool fire;
+	public bool drag;
+	public bool dragRelease;
 
 	[Header("Movement Settings")]
 	public bool analogMovement;
@@ -59,6 +61,12 @@ public class InputManager : MonoBehaviour
 	public void OnFire(InputValue value) {
 		
 		fire = value.isPressed;
+		drag = value.isPressed;
+
+		// if we were dragging and now we are not,
+		// -> Trigger drag release
+		if (drag && !value.isPressed)
+			dragRelease = true;
 	}
 
 	private void OnApplicationFocus(bool hasFocus) {
