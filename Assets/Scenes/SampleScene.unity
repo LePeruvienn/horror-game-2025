@@ -148,7 +148,7 @@ PrefabInstance:
       objectReference: {fileID: 677655011}
     - target: {fileID: 2038911248160145511, guid: 93c9cecc68dae390ca26cb9370d552ec, type: 3}
       propertyPath: m_VersionIndex
-      value: 2808
+      value: 2817
       objectReference: {fileID: 0}
     - target: {fileID: 5576551790761593595, guid: 93c9cecc68dae390ca26cb9370d552ec, type: 3}
       propertyPath: m_Mesh
@@ -194,13 +194,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6819284149968087902, guid: 93c9cecc68dae390ca26cb9370d552ec, type: 3}
+      propertyPath: torqueStrength
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7671893822716893914, guid: 93c9cecc68dae390ca26cb9370d552ec, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1889326339}
     - target: {fileID: 7671893822716893914, guid: 93c9cecc68dae390ca26cb9370d552ec, type: 3}
       propertyPath: m_VersionIndex
-      value: 4780
+      value: 4789
       objectReference: {fileID: 0}
     - target: {fileID: 7926285199272089435, guid: 93c9cecc68dae390ca26cb9370d552ec, type: 3}
       propertyPath: m_Name

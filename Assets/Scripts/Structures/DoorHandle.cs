@@ -4,7 +4,8 @@ public class DoorHandle : MonoBehaviour, IDraggable
 {
 
 	[SerializeField] private Rigidbody doorRigidBody;
-	[SerializeField] private float torqueStrength = 10f;
+	[SerializeField] private float torqueStrength = 3f;
+	[SerializeField] private bool reverseInput = false;
 
 	private GameManager _gameManager;
 	private Transform _playerTransform;
@@ -24,14 +25,17 @@ public class DoorHandle : MonoBehaviour, IDraggable
 
 	public void Drag(Vector2 value) {
 
-		// Get input horizontal axis
-		float input = value.x;
+		// Handle reverse input
+		int sign = (reverseInput) ? -1 : 1;
 
-		// Compute torque value, we add the force to the Y rotation axis
-		Vector3 torque = new Vector3(0f, -input * torqueStrength, 0f);
+		// We want to make that we can move door my look horizontally of verticaly
+		float input = (value.x - value.y) * sign;
 
-		// Add torque to door Rigidbody
-		doorRigidBody.AddTorque(torque, ForceMode.Acceleration);
+		// Compute new velocity
+		Vector3 newVelocity = new Vector3(0f, -input * torqueStrength, 0f);
+
+		// Set new velocity
+		doorRigidBody.angularVelocity = newVelocity;
 	}
 
 	public void DragRelease() {

@@ -5,6 +5,14 @@ public enum DoorType {
 	Rotation
 }
 
+
+/* ------------------------------------------
+ *
+ * ⚠️ THIS SCRIPT IS OBSOLET NOT USED ANYMORE
+ *    He is just here is case ^^
+ * ------------------------------------------
+ */
+
 public class Door : MonoBehaviour, IInteractable
 {
 	[Header("Door Configuration")]
