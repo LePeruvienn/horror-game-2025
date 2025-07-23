@@ -2,50 +2,69 @@ using UnityEngine;
 
 public class DrawerHandle : MonoBehaviour, IDraggable
 {
-
-	[SerializeField] private Transform drawer;
+	[SerializeField] private Rigidbody drawerRigidBody;
+	[SerializeField] private ConfigurableJoint joint;
 	[SerializeField] private float torqueStrength = 0.005f;
+	[SerializeField] private float drawerDrag = 5f;
 	[SerializeField] private Vector3 direction = new Vector3(1, 0, 0);
 	[SerializeField] private bool reverseInput = false;
 	[SerializeField] private float max = 1f;
 	[SerializeField] private float min = 0f;
 
-	private Vector3 _pmax;
-	private Vector3 _pmin;
+	private float _projectedPos;
 
-	private float offset = 0f;
-
-	// Start is called once before the first execution of Update after the MonoBehaviour is created
 	private void Start() {
 
-		_pmax = (direction * max) + drawer.position;
-		_pmin = (direction * min) + drawer.position;
+		// Config rigidBody
+		drawerRigidBody.useGravity = false;
+		drawerRigidBody.interpolation = RigidbodyInterpolation.Interpolate;
+		drawerRigidBody.linearDamping = drawerDrag;
+
+		// Lock all axes
+		joint.xMotion = ConfigurableJointMotion.Locked;
+		joint.yMotion = ConfigurableJointMotion.Locked;
+		joint.zMotion = ConfigurableJointMotion.Locked;
+
+		// Allow movement on one axis
+		if (Mathf.Abs(direction.x) > 0f)
+			joint.xMotion = ConfigurableJointMotion.Limited;
+		else if (Mathf.Abs(direction.y) > 0f)
+			joint.yMotion = ConfigurableJointMotion.Limited;
+		else if (Mathf.Abs(direction.z) > 0f)
+			joint.zMotion = ConfigurableJointMotion.Limited;
+
+		// Set linear limit
+		SoftJointLimit limit = new SoftJointLimit();
+		limit.limit = max;
+		joint.linearLimit = limit;
+
+		// Lock rotation
+		joint.angularXMotion = ConfigurableJointMotion.Locked;
+		joint.angularYMotion = ConfigurableJointMotion.Locked;
+		joint.angularZMotion = ConfigurableJointMotion.Locked;
+
+		// Add joint projection to reduce jittering
+		joint.projectionMode = JointProjectionMode.PositionAndRotation;
+		joint.projectionDistance = 0.01f;
 	}
 
-	// Update is called once per frame
-	private void Update() {
+	public void Drag(Vector2 value) {
 
-	}
+		int sign = reverseInput ? -1 : 1;
+		float input = (value.y - value.x) * sign * torqueStrength;
 
-	public void Drag(Vector2 value)
-	{
-		// Handle reverse input
-		int sign = (reverseInput) ? -1 : 1;
+		// Get local position projected along direction
+		Vector3 localPos = transform.localPosition;
+		_projectedPos = Vector3.Dot(localPos, direction.normalized);
 
-		// Input handling
-		float input = (value.y - value.x) * sign;
+		// Stop movement if at limit
+		if ((_projectedPos >= max && input > 0f) || (_projectedPos <= min && input < 0f))
+		{
+			drawerRigidBody.linearVelocity = Vector3.zero;
+			return;
+		}
 
-		// Compute new position
-		Vector3 newPosition = drawer.position + direction * input * torqueStrength;
-
-		// Project the movement onto the direction axis
-		Vector3 localOffset = newPosition - _pmin;
-		float projectedDistance = Vector3.Dot(localOffset, direction.normalized);
-
-		// Clamp the movement between min and max
-		projectedDistance = Mathf.Clamp(projectedDistance, 0f, max - min);
-
-		// Apply the clamped position
-		drawer.position = _pmin + direction.normalized * projectedDistance;
+		drawerRigidBody.linearVelocity = direction.normalized * input;
 	}
 }
+

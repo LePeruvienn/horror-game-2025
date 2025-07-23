@@ -5,11 +5,14 @@ public class DoorHandle : MonoBehaviour, IDraggable
 
 	[SerializeField] private Rigidbody doorRigidBody;
 	[SerializeField] private float torqueStrength = 3f;
+	[SerializeField] private float doorDrag = 5f;
 	[SerializeField] private bool reverseInput = false;
 
 	// Start is called once before the first execution of Update after the MonoBehaviour is created
 	private void Start() {
 
+		// Set door drag
+		doorRigidBody.linearDamping = doorDrag;
 	}
 
 	// Update is called once per frame
