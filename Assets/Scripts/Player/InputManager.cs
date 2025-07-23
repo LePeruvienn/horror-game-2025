@@ -6,6 +6,7 @@ public class InputManager : MonoBehaviour
 	[Header("Character Input Values")]
 	public Vector2 move;
 	public Vector2 look;
+	public Vector2 mouse;
 	public bool jump;
 	public bool sprint;
 	public bool crouch;
@@ -29,8 +30,12 @@ public class InputManager : MonoBehaviour
 
 	public void OnLook(InputValue value) {
 
+		mouse = value.Get<Vector2>();
+
 		if(cursorInputForLook)
 			look = value.Get<Vector2>();
+		else
+			look = Vector2.zero;
 	}
 
 	public void OnJump(InputValue value) {

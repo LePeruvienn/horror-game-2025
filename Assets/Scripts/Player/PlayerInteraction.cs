@@ -10,12 +10,16 @@ public class PlayerInteraction : MonoBehaviour
 	[SerializeField] private float Range = 2.0f;
 	[SerializeField] private float Force = 2.0f;
 
-	private bool haveRaycasted = false;
-	private GameObject raycastedObject = null;
-	private bool _isHoldingProps = false;
-	private Props _heldProps;
 	private InputManager _input;
 	private GameObject _mainCamera;
+
+	private bool _haveRaycasted = false;
+	private GameObject _raycastedObject = null;
+
+	private bool _isHoldingProps = false;
+	private Props _heldProps;
+
+	private IDraggable _draggedObject;
 
 	private void Awake() {
 
@@ -33,8 +37,11 @@ public class PlayerInteraction : MonoBehaviour
 	// Update is called once per frame
 	private void Update() {
 
-		// Reset haveRaycasted value
-		haveRaycasted = false;
+		// Set look iunput to true
+		_input.cursorInputForLook = true;
+
+		// Reset _haveRaycasted value
+		_haveRaycasted = false;
 		
 		// Handle inputs
 		if (_input.interact)
@@ -48,6 +55,9 @@ public class PlayerInteraction : MonoBehaviour
 		
 		if (_input.drag)
 			Drag();
+
+		else if (_draggedObject != null)
+			_draggedObject = null;
 	}
 
 	private void Interact() {
@@ -56,17 +66,17 @@ public class PlayerInteraction : MonoBehaviour
 		_input.interact = false;
 
 		// If we dont have raycasted the object for the current farme, raycast it
-		if (haveRaycasted == false) {
+		if (_haveRaycasted == false) {
 
-			raycastedObject = InteractionRaycast();
-			haveRaycasted = true;
+			_raycastedObject = InteractionRaycast();
+			_haveRaycasted = true;
 		}
 
 		// If we dont hit an object stop here
-		if (raycastedObject == null) return;
+		if (_raycastedObject == null) return;
 
 		// Get IInteractable Interface
-		IInteractable interactable = raycastedObject.GetComponent<IInteractable>();
+		IInteractable interactable = _raycastedObject.GetComponent<IInteractable>();
 
 		// If we can interact with the object, well call the interact method
 		if (interactable != null)
@@ -75,22 +85,42 @@ public class PlayerInteraction : MonoBehaviour
 
 	private void Drag() {
 
-		// If we dont have raycasted the object for the current farme, raycast it
-		if (haveRaycasted == false) {
+		// If we were already dragging
+		if (_draggedObject != null) {
 
-			raycastedObject = InteractionRaycast();
-			haveRaycasted = true;
+			// Set look input to false, so we cannot move the camera
+			_input.cursorInputForLook = false;
+
+			// Drag dragged object and return
+			_draggedObject.Drag(_input.mouse);
+			return;
+		}
+
+		// If we dont have raycasted the object for the current farme, raycast it
+		if (_haveRaycasted == false) {
+
+			_raycastedObject = InteractionRaycast();
+			_haveRaycasted = true;
 		}
 
 		// If we dont hit an object stop here
-		if (raycastedObject == null) return;
+		if (_raycastedObject == null) return;
 
 		// Get IDraggable Interface
-		IDraggable draggable = raycastedObject.GetComponentInChildren<IDraggable>();
+		IDraggable draggable = _raycastedObject.GetComponentInChildren<IDraggable>();
 		
 		// If the object is a draggable drag it !
-		if (draggable != null)
-			draggable.Drag (_input.look);
+		if (draggable != null) {
+
+			// Drag object with
+			draggable.Drag (_input.mouse);
+
+			// Set dragged object
+			_draggedObject = draggable;
+
+			// Set look input to false, so we cannot move the camera
+			_input.cursorInputForLook = false;
+		}
 	}
 
 	private void Throw() {
