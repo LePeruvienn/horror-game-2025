@@ -1,5 +1,8 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(BoxCollider))]
+[RequireComponent(typeof(HingeJoint))]
 public class DoorHandle : MonoBehaviour, IDraggable
 {
 

@@ -11,9 +11,8 @@ GameObject:
   - component: {fileID: 7185448710009104955}
   - component: {fileID: 7671893822716893914}
   - component: {fileID: 1466871605466603318}
-  - component: {fileID: 2663310090031443748}
   - component: {fileID: 5576551790761593595}
-  - component: {fileID: 6819284149968087902}
+  - component: {fileID: 2663310090031443748}
   - component: {fileID: 6902017756304709164}
   m_Layer: 7
   m_Name: Handle
@@ -34020,6 +34019,14 @@ MonoBehaviour:
       data:
         m_Subdivisions: 3
         m_Smooth: 1
+--- !u!33 &5576551790761593595
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7571270918619278150}
+  m_Mesh: {fileID: 0}
 --- !u!23 &2663310090031443748
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -34065,27 +34072,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &5576551790761593595
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7571270918619278150}
-  m_Mesh: {fileID: 0}
---- !u!114 &6819284149968087902
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7571270918619278150}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f63a70ea6c23ce63883c2b91eca0dc32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorRigidBody: {fileID: 4346624216010686568}
 --- !u!136 &6902017756304709164
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -34125,6 +34111,7 @@ GameObject:
   - component: {fileID: 3296315693390620142}
   - component: {fileID: 4346624216010686568}
   - component: {fileID: 2579224172634659789}
+  - component: {fileID: 4109524885793934388}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -34529,3 +34516,19 @@ HingeJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &4109524885793934388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7926285199272089435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f63a70ea6c23ce63883c2b91eca0dc32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorRigidBody: {fileID: 4346624216010686568}
+  torqueStrength: 3
+  doorDrag: 5
+  reverseInput: 0

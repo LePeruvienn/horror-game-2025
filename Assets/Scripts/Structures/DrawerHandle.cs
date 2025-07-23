@@ -1,5 +1,8 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(BoxCollider))]
+[RequireComponent(typeof(ConfigurableJoint))]
 public class DrawerHandle : MonoBehaviour, IDraggable
 {
 	[SerializeField] private Rigidbody drawerRigidBody;
