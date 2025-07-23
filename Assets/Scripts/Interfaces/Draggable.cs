@@ -3,6 +3,4 @@ using UnityEngine;
 public interface IDraggable
 {
 	void Drag(Vector2 value);
-	void DragRelease();
-
 }

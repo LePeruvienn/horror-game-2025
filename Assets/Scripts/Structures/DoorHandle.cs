@@ -7,15 +7,9 @@ public class DoorHandle : MonoBehaviour, IDraggable
 	[SerializeField] private float torqueStrength = 3f;
 	[SerializeField] private bool reverseInput = false;
 
-	private GameManager _gameManager;
-	private Transform _playerTransform;
-
 	// Start is called once before the first execution of Update after the MonoBehaviour is created
 	private void Start() {
 
-		// Get GameManager instance and Player Interaction if not done yet
-		_gameManager = GameManager.getInstance();
-		_playerTransform = _gameManager.player.transform;
 	}
 
 	// Update is called once per frame
