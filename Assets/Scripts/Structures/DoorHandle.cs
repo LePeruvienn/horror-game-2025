@@ -11,6 +11,10 @@ public class DoorHandle : MonoBehaviour, IDraggable
 	[SerializeField] private float doorDrag = 5f;
 	[SerializeField] private bool reverseInput = false;
 
+	private GameManager _gameManager;
+	private Player _player;
+	private InputManager _input;
+
 	// Start is called once before the first execution of Update after the MonoBehaviour is created
 	private void Start() {
 
@@ -38,8 +42,7 @@ public class DoorHandle : MonoBehaviour, IDraggable
 		doorRigidBody.angularVelocity = newVelocity;
 	}
 
-	public void DragRelease() {
+	public void Push (Transform transform) {
 
-		// TODO: !!!
 	}
 }

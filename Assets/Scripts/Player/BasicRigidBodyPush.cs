@@ -7,8 +7,25 @@ public class BasicRigidBodyPush : MonoBehaviour
 
 	[Range(0.5f, 5f)] public float strength = 1.1f;
 
+	private GameManager _gameManager;
+	private Player _player;
+	private InputManager _input;
+
+	private void Start () {
+
+		// Get GameManager references
+		_gameManager = GameManager.getInstance();
+		_player = _gameManager.player;
+	}
+
 	private void OnControllerColliderHit(ControllerColliderHit hit)
 	{
+
+		DoorHandle doorHandle = hit.gameObject.GetComponent<DoorHandle>();
+
+		if (doorHandle != null)
+			Debug.Log ("🫃");
+		
 		if (canPush) PushRigidBodies(hit);
 	}
 

@@ -1,0 +1,203 @@
+{
+  "main": {
+    "id": "0e8fe78c98e6806f",
+    "type": "split",
+    "children": [
+      {
+        "id": "286c49aa54ee3227",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ed83ed7c27f74114",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "GameDesign/Notes.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Notes"
+            }
+          },
+          {
+            "id": "adb34c980761ed59",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "GameDesign/Scenario.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Scenario"
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "17b3101c28fe4733",
+    "type": "split",
+    "children": [
+      {
+        "id": "c8e6f0cb7cb68fda",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d70ec279b9bc4f40",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "3f4064cc82ae0f5f",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "f505dc5beec59099",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "e6a7308ceb82d0ae",
+    "type": "split",
+    "children": [
+      {
+        "id": "ad82ab7dc5690f63",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "88995251134a0501",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "GameDesign/GDD.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for GDD"
+            }
+          },
+          {
+            "id": "50f06c80556a3a6e",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "GameDesign/GDD.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from GDD"
+            }
+          },
+          {
+            "id": "faf2fd2b9496e5f3",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "f3f4fd8e6ad32504",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "GameDesign/GDD.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of GDD"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "adb34c980761ed59",
+  "lastOpenFiles": [
+    "GameDesign/Personnages.md",
+    "GameDesign/Scenario.md",
+    "GameDesign/Notes.md",
+    "GameDesign/Trame.md",
+    "GameDesign/Untitled",
+    "Library/Search/propertyDatabase.db_6bb2554099ef429590e3cd7dcbc60729_temp",
+    "Library/Search/propertyAliases.db_d14b9b875d564733a72336e117d601bf_temp",
+    "Temp/UnityTempFile-4226b504262dfa7ceb834e408d8d1fc4",
+    "Temp/ADB-Refreshc810494168bffa8f392ea9417458774f",
+    "Temp/ADB-Refreshb5f6bcaac36f5f51491d85b995dd4d3f",
+    "Temp/ADB-Refreshe443906c33b0b328a8c962dcd7a943e2",
+    "Temp/ADB-Refreshf77b62b1227f343c797bfb017e54c5bb",
+    "Temp/UnityTempFile-935b932e64b299fefb359acb3476de4f",
+    "Temp/__Backupscenes/0.backup"
+  ]
+}

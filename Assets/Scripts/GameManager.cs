@@ -9,8 +9,6 @@ public class GameManager : MonoBehaviour
 
 	private void Awake() {
 
-		Debug.Log ("AWAKE");
-
 		// Set instance if it's null
 		if (GameManager._instance == null)
 			GameManager._instance = this;

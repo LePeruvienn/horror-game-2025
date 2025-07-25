@@ -11,11 +11,14 @@ public class Player : MonoBehaviour
 
 	[HideInInspector] public PlayerInteraction Interaction;
 	[HideInInspector] public PlayerMovement Movement;
+	[HideInInspector] public InputManager Input;
+
 
 	private void Awake () {
 
 		// Get Player's components
 		Interaction = GetComponent<PlayerInteraction>();
 		Movement = GetComponent<PlayerMovement>();
+		Input = GetComponent<InputManager>();
 	}
 }
